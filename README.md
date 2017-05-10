@@ -67,9 +67,3 @@ $ terraform plan
 $ terraform apply
 $ terraform destroy
 ```
-
-Migrating the Provider
-----------------------
-
-Migrating this provider into upstream Terraform should be a 1-1 copy of the `opc` provider directory into `terraform/builtin/providers/`.
-All of the helper boilerplate should be removed with the expectation of documentation, which will be placed in the appropriate locations.
