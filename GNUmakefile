@@ -7,7 +7,7 @@ default: build
 build: fmtcheck
 	go install
 
-test: fmtcheck
+test: fmtcheck errcheck
 	go test -i $(TEST) || exit 1
 	echo $(TEST) | \
 		xargs -t -n4 go test $(TESTARGS) -timeout=30s -parallel=4
@@ -44,4 +44,7 @@ fmtcheck:
 errcheck:
 	@sh -c "'$(CURDIR)/scripts/errcheck.sh'"
 
-.PHONY: build test testacc testrace cover vet fmt fmtcheck errcheck
+vendor-status:
+	@govendor status
+
+.PHONY: build test testacc testrace cover vet fmt fmtcheck errcheck vendor-status
