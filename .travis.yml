@@ -13,9 +13,10 @@ install:
 - go get github.com/kardianos/govendor
 
 script:
-- make vet
-- make vendor-status
 - make test
+- make vendor-status
+- make vet
+
 branches:
   only:
   - master
