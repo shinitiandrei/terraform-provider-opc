@@ -7,7 +7,7 @@ default: build
 build: fmtcheck
 	go install
 
-test: fmtcheck
+test: fmtcheck errcheck
 	go test -i $(TEST) || exit 1
 	echo $(TEST) | \
 		xargs -t -n4 go test $(TESTARGS) -timeout=30s -parallel=4
@@ -44,6 +44,9 @@ fmtcheck:
 errcheck:
 	@sh -c "'$(CURDIR)/scripts/errcheck.sh'"
 
+vendor-status:
+	@govendor status
+
 test-compile: fmtcheck
 	@if [ "$(TEST)" = "./..." ]; then \
 		echo "ERROR: Set TEST to a specific package. For example,"; \
@@ -52,4 +55,4 @@ test-compile: fmtcheck
 	fi
 	go test -c $(TEST) $(TESTARGS)
 
-.PHONY: build test testacc testrace cover vet fmt fmtcheck errcheck
+.PHONY: build test testacc testrace cover vet fmt fmtcheck errcheck vendor-status test-compile
