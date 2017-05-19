@@ -11,10 +11,11 @@ install:
 # See: https://github.com/golang/go/issues/12933
 - bash scripts/gogetcookie.sh
 - go get github.com/kardianos/govendor
-- go install -a -v cmd/vet
 
 script:
-- make vet vendor-status test
+- make vet
+- make vendor-status
+- make test
 branches:
   only:
   - master
